@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1614" />
+  <meta name="description" content="给故事一次抽牌的机会。选择主题，翻开三张原创故事卡，写下不同的结局。" />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:title" content="NOCTURNE · 故事抽卡剧场" />
+  <meta property="og:description" content="抽出三张故事卡，决定故事怎样继续。" />
+  <title>NOCTURNE · 故事抽卡剧场</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%230d1614%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%23b4eada%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M32%2017%2038%2032%2032%2047%2026%2032Z%22%20fill%3D%22none%22%20stroke%3D%22%23b4eada%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%223%22%20fill%3D%22%23b4eada%22%2F%3E%3C%2Fsvg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <div class="sky-layer" aria-hidden="true">
+      <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+      <div class="stars"></div><div class="horizon-glow"></div>
+    </div>
+    <header class="topbar">
+      <div class="wordmark"><div class="brand-mark" aria-hidden="true"><span>✧</span></div><span id="brandText">NOCTURNE</span></div>
+      <div class="topbar-right"><span class="desktop-text">A ROOM FOR IMAGINED THINGS</span><button class="quiet-btn" id="homeBtn" aria-label="返回首页">↗ 返回</button></div>
+    </header>
+    <main class="main">
+      <section class="screen intro active" id="introScreen" aria-labelledby="heroTitle">
+        <div class="intro-art" aria-hidden="true"><div class="intro-halo"></div><div class="intro-card intro-a"><div class="mini-sigil"></div></div><div class="intro-card intro-b"><div class="mini-sigil"></div></div><div class="intro-card intro-c"><div class="mini-sigil"></div></div></div>
+        <div class="intro-copy"><p class="eyebrow" id="introEyebrow">CHAPTER 01 / FICTIONAL CONNECTIONS</p><h1 id="heroTitle">关系剧场</h1><p class="intro-subtitle" id="introDescription">为两个虚构角色，抽取一段未曾写下的故事。</p>
+          <nav class="selector" aria-label="场景模板" id="templateTabs"></nav>
+          <div class="name-grid"><label><span id="labelA">角色 A</span><input id="fieldA" maxlength="18" autocomplete="off" placeholder="输入名称" /></label><label><span id="labelB">角色 B</span><input id="fieldB" maxlength="18" autocomplete="off" placeholder="输入名称" /></label></div>
+          <div class="hook-panel" aria-label="本次互动主题"><p class="hook-question" id="hookQuestion">这次想看哪一幕？</p><div class="hook-options" role="group" aria-label="故事方向" id="hookChoices"></div></div>
+          <button class="primary-btn" id="startBtn"><span id="startBtnText">进入关系剧场</span><span class="btn-symbol">✦</span></button>
+          <details class="invite-loader" id="inviteLoader">
+            <summary>收到朋友的故事挑战？</summary>
+            <label for="inviteInput">粘贴朋友发来的挑战口令，接着写同一段故事。</label>
+            <textarea id="inviteInput" rows="2" maxlength="900" placeholder="粘贴 N4| 开头的口令或整段邀请文字"></textarea>
+            <button type="button" class="outline-btn" id="loadInviteBtn">载入这道题</button>
+            <p id="inviteNotice" class="invite-notice" hidden></p>
+          </details>
+          <p class="aside-note">原创故事卡 · 不是传统塔罗 · 无需登录</p>
+        </div>
+        <div class="bottom-footnote intro-footnote">NOCTURNE&nbsp; / &nbsp;INTERACTIVE RITUAL SYSTEM&nbsp; / &nbsp;VOL. 001</div>
+      </section>
+      <section class="screen ritual" id="ritualScreen" aria-labelledby="ritualTitle">
+        <div class="ritual-header"><p class="eyebrow" id="ritualEyebrow">THE ARRANGEMENT / 01</p><h2 id="ritualTitle">洗牌</h2><p class="ritual-tip" id="ritualTip">让故事从这里开始</p></div>
+        <div class="shuffling" id="shuffling" aria-hidden="true"></div>
+        <div class="wheel-zone" id="wheelZone" aria-label="卡牌轮盘。左右滑动轮盘并点选三张卡牌。"><div class="card-wheel" id="cardWheel"></div></div>
+        <div class="selected-rail" id="selectedRail" aria-label="已选卡牌" aria-live="polite"></div>
+        <div class="wheel-controls" id="wheelControls"><span class="indicator-dot"></span><span>滑动牌轮 · 点选卡片</span><span class="tiny-arrow">↔</span></div>
+        <button class="skip-animation" id="skipBtn">跳过洗牌</button>
+        <div class="bottom-footnote ritual-footnote">A MOMENT OF CHANCE — A STORY OF YOUR OWN</div>
+      </section>
+      <section class="screen reveal" id="revealScreen" aria-labelledby="revealTitle">
+        <div class="ritual-header"><p class="eyebrow">THE REVEAL / 03</p><h2 id="revealTitle">这是你抽到的卡</h2><p class="ritual-tip">轻触卡片，也可以再次翻看</p></div>
+        <div class="result-stage" id="resultStage"></div>
+        <div class="ending-panel"><p class="ending-kicker">最后一笔，交给你</p><h3 id="endingQuestion">你希望这段故事怎样继续？</h3><div class="ending-options" id="endingChoices" role="group" aria-label="选择故事的结局方向"></div></div>
+        <div class="reveal-bottom"><button class="primary-btn" id="interpretBtn" disabled>选好故事走向，再揭晓 <span class="btn-symbol">✦</span></button></div>
+        <div class="bottom-footnote">THREE CARDS · INFINITE POSSIBILITIES</div>
+      </section>
+      <section class="screen story" id="storyScreen" aria-labelledby="storyTitle">
+        <p class="eyebrow" id="storyEyebrow">A STORY WRITTEN IN CARDS</p>
+        <h2 id="storyTitle">抽到的这一页</h2><p class="story-subtitle" id="storySubtitle"></p>
+        <div class="story-hook" aria-live="polite"><span class="hook-overline">本次故事焦点</span><strong id="chosenHookLabel"></strong><p id="hookNarrative"></p></div>
+        <div class="story-ending" aria-live="polite"><span class="hook-overline">你写下的结尾</span><strong id="endingLabel"></strong><p id="endingNarrative"></p><p id="compareNote" class="compare-note" hidden></p></div>
+        <div class="story-cards" id="storyCards"></div><div class="story-reading" id="storyReading"></div>
+        <div class="choice-after"><div><strong id="choiceAfterTitle">最后一张卡，还能改写一次。</strong><p id="rerollNote">如果你更想看另一种发展，可以只替换最后一张。</p></div><button type="button" id="redrawBtn" class="outline-btn">改写最后一张 ↻</button></div>
+        <div class="story-actions"><button class="primary-btn" id="downloadBtn">保存纪念卡 <span class="btn-symbol">↓</span></button><button class="outline-btn" id="copyBtn">复制故事 <span>⧉</span></button><button class="outline-btn" id="challengeBtn">发起同题挑战 <span>↗</span></button><button class="outline-btn" id="againBtn">再抽一次 <span>↻</span></button></div>
+        <p class="legal-note" id="legalNote"></p>
+      </section>
+    </main>
+    <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+  </div>
+  <script src="config.js"></script><script src="app.js"></script>
+</body></html>
