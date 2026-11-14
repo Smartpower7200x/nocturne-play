@@ -1,0 +1,179 @@
+/* NOCTURNE / V0.6 — archival cards, restrained visual direction.
+   Pure presentation layer: interaction, randomization and share payload unchanged. */
+:root {
+  --night:#0a1715;
+  --night-deep:#07110f;
+  --night-raised:#162521;
+  --paper:#f1ede1;
+  --ink-secondary:#c3c9bb;
+  --ink-quiet:#8e9d90;
+  --seal:#ade4d4;
+  --seal-strong:#bce9d8;
+  --folio:#c9ae79;
+  --hairline:rgba(203,190,155,.25);
+  --bg:#0a1715;
+  --panel:#14251f;
+  --ink:#f1ede1;
+  --muted:#bec8bd;
+  --mint:#ade4d4;
+  --mint2:#bce9d8;
+  --line:rgba(206,197,169,.24);
+}
+html{scroll-behavior:smooth}
+body{background:#07110f}
+.app-shell{background:
+  radial-gradient(ellipse 34rem 34rem at 80% 5%,rgba(66,130,115,.12),transparent 68%),
+  radial-gradient(ellipse 30rem 35rem at 10% 94%,rgba(166,135,78,.065),transparent 70%),#0a1715;}
+.sky-layer{opacity:.5}
+.stars{opacity:.39}
+.horizon-glow{filter:blur(90px);opacity:.35}
+.topbar{height:75px;border-bottom:1px solid rgba(206,188,146,.2)}
+.wordmark{font-size:12px;letter-spacing:.4em;color:#f2ecdc}
+.brand-mark{width:34px;height:34px;border-color:rgba(202,167,109,.7);color:#d8bc86}
+.brand-mark span{font-size:19px}
+.topbar-right .desktop-text{color:#b6ae9b;font-family:Georgia,serif;font-size:11px;letter-spacing:.21em}
+.quiet-btn{color:#dedccf;font-size:13px}
+.eyebrow,.intro .eyebrow,.ritual-header .eyebrow,.story .eyebrow{color:#cbaf79;letter-spacing:.21em;font-family:Georgia,'Songti SC',serif;font-size:11px;font-weight:500}
+.intro.active{isolation:isolate}
+.intro-copy{max-width:605px}
+.intro h1{font-weight:400;font-size:clamp(64px,6.5vw,94px);letter-spacing:.035em;color:#f1eadd;margin-bottom:22px}
+.intro-subtitle{color:#c1cabf;max-width:28em;font-size:17px;line-height:1.9}
+.intro-art{filter:drop-shadow(0 20px 45px rgba(0,0,0,.35));transform-style:preserve-3d}
+.intro-halo{inset:2%;border-color:rgba(203,174,116,.31)}
+.intro-halo:before,.intro-halo:after{border-color:rgba(208,178,113,.16)}
+.intro-halo:after{inset:23%}
+.intro-halo{background:radial-gradient(circle,rgba(110,154,142,.12),transparent 67%)}
+.intro-card{border:6px solid #f2f0e5;outline:1px solid #b1a17e;border-radius:7px;background:
+  radial-gradient(ellipse at 50% 30%,rgba(255,255,255,.78),transparent 53%),
+  linear-gradient(135deg,#c9e9dc,#8fb5a8);
+  box-shadow:0 25px 45px rgba(0,0,0,.39),inset 0 0 0 2px #609185,inset 0 0 0 7px #d7eade}
+.intro-c{box-shadow:0 32px 53px rgba(0,0,0,.52),inset 0 0 0 2px #609185,inset 0 0 0 7px #d7eade}
+.mini-sigil{width:74%;height:79%;border:1px solid rgba(69,128,111,.72);box-shadow:inset 0 0 0 5px rgba(213,238,223,.65),inset 0 0 0 6px rgba(69,128,111,.28)}
+.mini-sigil:before{color:#387f75;text-shadow:none;font-size:94px}
+.mini-sigil:after{color:#478b7c;letter-spacing:.35em;font-size:10px}
+.selector{border-bottom:1px solid rgba(201,174,121,.24);gap:27px;margin-bottom:26px;flex-wrap:nowrap;justify-content:flex-start}
+.segment,.segment.active{background:transparent;border:0;border-radius:0;min-height:48px;color:#aebdb2;padding:11px 0 13px;font:400 14px/1.5 var(--serif);position:relative;white-space:nowrap}
+.segment.active{color:#f1e9d7}
+.segment.active:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#cbae79}
+.segment:hover{color:#e2e6d7}
+.name-grid{gap:19px}
+.name-grid label{font-size:12px;letter-spacing:.04em;color:#b7bdad}
+.name-grid input{background:transparent;border:0;border-bottom:1px solid rgba(209,198,164,.4);border-radius:0;padding:0 0 3px;height:49px;font-family:var(--serif);font-size:19px;color:#f4eede}
+.name-grid input:focus{outline:0;border-bottom-color:#cbb078;background:rgba(200,178,120,.03)}
+.hook-panel{margin-top:10px;margin-bottom:26px}
+.hook-question{font:400 16px/1.7 var(--serif);color:#ede8dc;margin-bottom:13px}
+.hook-options{gap:9px}
+.hook-choice{border:1px solid rgba(204,197,170,.28);border-radius:4px;min-height:49px;background:rgba(243,237,213,.018);color:#b7c5b5;font-size:13px}
+.hook-choice.active{border-color:#c9ae79;color:#f3eddd;background:rgba(201,174,121,.13);box-shadow:inset 0 0 0 1px rgba(201,174,121,.13)}
+.primary-btn{background:linear-gradient(115deg,#bde9d7,#91cbb9);border:1px solid rgba(229,255,234,.36);border-radius:5px;min-height:61px;color:#122b24;font-size:16px;letter-spacing:.07em;box-shadow:0 20px 35px rgba(0,0,0,.16)}
+.primary-btn:hover{background:#c9eddd}
+.invite-loader{border-top:1px solid rgba(206,194,164,.28);padding-top:16px;margin-top:21px}
+.invite-loader summary{color:#c2c6b6;font-size:12px}
+.aside-note{display:none}
+.bottom-footnote{color:rgba(211,190,148,.4);font-size:9px}
+/* Selection / make the title separate from the physical cards */
+.ritual-header h2{font-size:clamp(32px,3.6vw,48px);letter-spacing:.055em;font-weight:400}
+.ritual-tip{font-size:14px;color:#c5cbbd}
+.slot-mini{color:#d0b480;border-color:rgba(201,174,121,.38)}
+.slot.active .slot-mini{background:#b7dfd0;border-color:#b7dfd0;color:#15382e}
+.slot-desc small{color:#a5b0a5}
+.wheel-card{box-shadow:0 7px 18px rgba(0,0,0,.3)}
+.card-back{border-color:#eae8da!important;box-shadow:inset 0 0 0 2px #4c9383,inset 0 0 0 5px #d4e9dc!important;background:#c3e5d9!important}
+.card-back:after{content:'✧';position:absolute;left:50%;bottom:9%;transform:translateX(-50%);font:19px Georgia,serif;color:rgba(57,124,104,.72)}
+.card-back-inner{border-color:rgba(75,127,111,.62)!important}
+.wheel-controls{color:#d0d5c8}
+/* Result / introduce chapter plate typography and a controlled gallery */
+.reveal .ritual-header h2{font-size:clamp(32px,4vw,50px)}
+.result-column{filter:drop-shadow(0 16px 15px rgba(0,0,0,.28))}
+.card-caption strong{color:#efe9dc}
+.ending-panel{border-top:1px solid rgba(205,190,151,.3);padding-top:25px}
+.ending-kicker{color:#cbb17d}
+.ending-panel h3{font-size:24px}
+.ending-choice{background:transparent;border-radius:4px;border-color:rgba(204,197,170,.33);color:#d3d6c9}
+.ending-choice[aria-pressed="true"]{color:#1b3128;background:#e5dcc1;border-color:#e5dcc1}
+/* Story / a paper insert, like finding a letter inside a black portfolio */
+.story{padding-top:clamp(38px,4.7vw,70px)}
+.story h2{font-size:clamp(45px,5vw,72px);letter-spacing:.045em}
+.story-subtitle{margin-bottom:39px}
+.story-hook{border-top:1px solid rgba(201,174,121,.4);padding-top:25px;margin-bottom:26px}
+.hook-overline{color:#bca477;font-family:var(--sans);font-size:11px;letter-spacing:.15em}
+.story-hook strong{font-size:clamp(28px,3vw,40px);color:#e9e8db}
+.story-hook p{color:#bec8bc;line-height:1.95;font-size:17px;max-width:40em}
+.story-ending{position:relative;isolation:isolate;background:linear-gradient(135deg,#efe8d7,#e0dac9);color:#273c33;border:1px solid #c6b68d;border-radius:3px;padding:36px 42px 40px;box-shadow:0 20px 0 -11px #c3b89a,0 22px 38px rgba(0,0,0,.26);margin-bottom:44px}
+.story-ending:before{content:'';position:absolute;inset:8px;border:1px solid rgba(145,127,87,.43);pointer-events:none}
+.story-ending:after{content:'✧';position:absolute;right:35px;top:22px;color:#9d956f;font:28px Georgia,serif}
+.story-ending .hook-overline{color:#7f765b}
+.story-ending strong{font-size:clamp(29px,3.5vw,41px);color:#233b32;line-height:1.36;margin-top:7px}
+.story-ending p{color:#405148;font-size:17px;line-height:1.9;max-width:41em}
+.story-ending .compare-note{color:#365c51;border-top-color:rgba(92,98,76,.22)}
+.story-cards{max-width:800px;gap:clamp(18px,3vw,34px);padding-top:0}
+.story-card strong{font-size:17px;color:#eee8db}
+.story-reading{border-color:rgba(198,177,128,.33);padding-top:34px}
+.reading-item h3{color:#c7b184}
+.reading-item p{color:#b8c7bb}
+.choice-after{border-top-color:rgba(201,174,121,.32)}
+.outline-btn{border-radius:4px;border-color:rgba(204,193,165,.39)}
+.legal-note{font-size:11px;color:#8e998d}
+/* Mobile: card/object then title, then plain controls; readable and no overlap */
+@media(max-width:780px){
+ .topbar{height:61px;padding:0 19px}
+ .intro.active{padding:18px 22px 48px}
+ .intro-art{width:min(57vw,216px);height:min(57vw,216px);min-height:175px;margin:6px auto 18px}
+ .intro .eyebrow{margin-bottom:10px;font-size:10px}
+ .intro h1{font-size:clamp(43px,11.5vw,55px);margin-bottom:10px}
+ .intro-subtitle{font-size:15px;line-height:1.75;margin-bottom:19px}
+ .selector{gap:22px;margin-bottom:16px}
+ .segment,.segment.active{font-size:13px;min-height:45px;padding:10px 0}
+ .name-grid{margin-bottom:23px}
+ .name-grid input{font-size:18px;height:43px}
+ .hook-panel{margin-bottom:20px}
+ .hook-question{font-size:15px}
+ .hook-choice{font-size:12px;min-height:48px}
+ .intro .primary-btn{min-height:58px}
+ .ritual.active{padding-top:20px}
+ .ritual-header .eyebrow{color:#cbaf79}
+ .ritual-header h2{font-size:clamp(28px,7.1vw,34px)}
+ .ritual-tip{font-size:12px}
+ .selected-rail{margin-top:20px}
+ .reveal.active{padding-left:20px;padding-right:20px}
+ .reveal .result-stage{margin-top:44px}
+ .ending-panel{margin-top:35px;padding-top:22px}
+ .ending-panel h3{font-size:21px}
+ .ending-choice{min-height:56px;font-size:12px}
+ .story{padding:38px 22px 85px}
+ .story h2{font-size:clamp(41px,10.8vw,50px);line-height:1.25}
+ .story-subtitle{margin-bottom:27px;font-size:15px}
+ .story-hook{padding-top:20px;margin-bottom:24px}
+ .story-hook strong{font-size:26px}
+ .story-hook p{font-size:15px}
+ .story-ending{padding:31px 25px 33px;margin-bottom:34px}
+ .story-ending:before{inset:7px}
+ .story-ending:after{right:21px;top:20px;font-size:23px}
+ .story-ending strong{font-size:28px}
+ .story-ending p{font-size:15px;line-height:1.85}
+ .story-cards{gap:11px}
+ .story-card strong{font-size:13px}
+ .story-reading{padding-top:25px}
+ .legal-note{line-height:1.7}
+}
+@media(max-width:374px){
+ .intro.active{padding:14px 18px 40px}
+ .intro-art{width:185px;height:185px;margin-bottom:11px}
+ .intro h1{font-size:43px}
+ .selector{gap:15px}
+ .segment{font-size:12px}
+ .hook-choice{font-size:11px}
+ .story{padding-left:17px;padding-right:17px}
+ .story-ending{padding:27px 19px}
+}
+@media(prefers-reduced-motion:reduce){.intro-c{animation:none}}
+/* Make the reveal feel like a real three-card spread, not miniature thumbnails. */
+.reveal .result-stage{width:100%;max-width:770px;gap:clamp(14px,2.4vw,32px)}
+.reveal .result-column{flex:0 1 calc((100% - 64px)/3);width:auto;min-width:0;max-width:185px}
+@media(max-width:780px){
+ .reveal .result-stage{width:100%;gap:11px;margin-top:42px}
+ .reveal .result-column{flex:0 1 calc((100% - 22px)/3);max-width:125px;width:auto}
+ .reveal .card-caption{margin-top:11px;gap:3px}
+ .reveal .card-caption strong{font-size:13px;line-height:1.45}
+ .reveal .card-caption span{font-size:11px}
+}

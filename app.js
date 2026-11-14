@@ -28,13 +28,29 @@ function iconSvg(symbol){const v={
   ring:'<circle cx="110" cy="136" r="45"/><circle cx="110" cy="136" r="34"/><path d="M88 92l22-30 22 30m-22-30v30"/>'
 }[symbol]||'<circle cx="110" cy="130" r="45"/>';
 return v;}
-function cardSVG(card,index,canvasMode=false){let palette=[['#f0e7dc','#52766e','#9b7d5d'],['#e3e9e3','#447c7c','#af9475'],['#e9dfdd','#676d85','#aa876e'],['#eee9dc','#637969','#b39d72']][index%4];return `<svg class="card-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 344" role="img" aria-label="${esc(card.title)}">`+
-`<rect width="220" height="344" rx="9" fill="${palette[0]}"/><rect x="9" y="10" width="202" height="324" rx="4" fill="none" stroke="${palette[2]}" stroke-width="1.4"/><rect x="15" y="16" width="190" height="312" rx="2" fill="none" stroke="${palette[2]}" stroke-width=".45"/>`+
-`<g stroke="${palette[2]}" fill="none" stroke-width=".95"><path d="M20 24h35M165 24h35M20 320h35M165 320h35"/><circle cx="110" cy="36" r="6"/><path d="M110 22v8m0 12v8M25 172h12m146 0h12"/></g>`+
-`<g stroke="${palette[1]}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">${iconSvg(card.symbol)}</g>`+
-`<g fill="${palette[2]}" opacity=".6"><circle cx="46" cy="58" r="2"/><circle cx="174" cy="58" r="2"/><circle cx="46" cy="248" r="2"/><circle cx="174" cy="248" r="2"/></g>`+
-`<path d="M64 256h92" stroke="${palette[2]}" stroke-width=".7"/><text x="110" y="279" font-size="19" font-family="Songti SC,Noto Serif CJK SC,serif" fill="#394b45" text-anchor="middle">${esc(card.title)}</text>`+
-`<text x="110" y="307" font-size="10" letter-spacing="2" fill="${palette[1]}" font-family="serif" text-anchor="middle">${String(index+1).padStart(2,'0')} · NOCTURNE</text></svg>`}
+function cardSVG(card,index,canvasMode=false){
+  // Engraved illustration style: gold folio, double frame, botanical star-chart texture.
+  // No heavy filters: the same SVG remains fast on mid-range Android browsers.
+  const palettes=[
+    ['#f2ead9','#476c67','#ae9373'],['#e8eee5','#456d6a','#b29a77'],
+    ['#eee3de','#66677e','#b9997c'],['#eee9db','#5e756c','#b19a75']
+  ];
+  const [paper,ink,foil]=palettes[index%palettes.length];
+  const rays=Array.from({length:16},(_,i)=>{const a=i*Math.PI/8;const x1=110+72*Math.cos(a),y1=153+72*Math.sin(a);const x2=110+80*Math.cos(a),y2=153+80*Math.sin(a);return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}"/>`}).join('');
+  return `<svg class="card-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 344" role="img" aria-label="${esc(card.title)}">`+
+  `<rect width="220" height="344" rx="8" fill="${paper}"/>`+
+  `<rect x="7.5" y="8" width="205" height="328" rx="3" fill="none" stroke="${foil}" stroke-width="1.5"/>`+
+  `<rect x="12" y="12.5" width="196" height="319" rx="2" fill="none" stroke="${ink}" stroke-opacity=".35" stroke-width=".5"/>`+
+  `<g stroke="${foil}" stroke-opacity=".75" stroke-width=".8" fill="none"><path d="M22 32h44M154 32h44M22 312h44M154 312h44"/><path d="M23 22h16M23 22v16M197 22h-16M197 22v16M23 322h16M23 322v-16M197 322h-16M197 322v-16"/><path d="M110 54v16"/><path d="M110 245v9"/></g>`+
+  `<text x="110" y="31" font-family="Georgia,serif" font-size="9" letter-spacing="2" text-anchor="middle" fill="${ink}">NOCTURNE</text>`+
+  `<g stroke="${foil}" stroke-width=".6" stroke-opacity=".5" fill="none">${rays}<ellipse cx="110" cy="153" rx="71" ry="92"/><ellipse cx="110" cy="153" rx="59" ry="79"/><path d="M110 70c-23 27-35 55-35 83s12 56 35 83M110 70c23 27 35 55 35 83s-12 56-35 83"/><path d="M39 153h142"/></g>`+
+  `<g fill="${foil}" opacity=".75"><circle cx="45" cy="72" r="1.6"/><circle cx="177" cy="72" r="1.6"/><circle cx="45" cy="232" r="1.6"/><circle cx="177" cy="232" r="1.6"/><circle cx="110" cy="53" r="3"/></g>`+
+  `<g stroke="${ink}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(11 24) scale(.90)">${iconSvg(card.symbol)}</g>`+
+  `<rect x="35" y="261" width="150" height=".8" fill="${foil}"/>`+
+  `<path d="M110 259l5 5-5 5-5-5Z" fill="${foil}"/>`+
+  `<text x="110" y="288" font-size="19" font-family="Songti SC,Noto Serif CJK SC,serif" fill="#344d44" text-anchor="middle">${esc(card.title)}</text>`+
+  `<text x="110" y="316" font-size="9" letter-spacing="1.8" fill="${ink}" font-family="Georgia,serif" text-anchor="middle">${String(index+1).padStart(2,'0')}  /  STORY CARD</text></svg>`;
+}
 function renderTemplates(){els.tabs.replaceChildren();for(const t of CFG.themes){const b=document.createElement('button');b.className='segment'+(t.id===theme.id?' active':'');b.setAttribute('aria-pressed',t.id===theme.id?'true':'false');b.textContent=t.title;b.type='button';b.addEventListener('click',()=>{theme=t;hookIndex=0;hostEndingIndex=null;$('inviteNotice').hidden=true;setIntro();renderTemplates()});els.tabs.appendChild(b)}}
 function setIntro(){ $('introEyebrow').textContent=theme.eyebrow;$('heroTitle').textContent=theme.title;$('introDescription').textContent=theme.intro;$('labelA').textContent=theme.inputA;$('labelB').textContent=theme.inputB;els.fieldA.value=theme.defaultA;els.fieldB.value=theme.defaultB;$('startBtnText').textContent=theme.startLabel;renderHooks()}
 function renderHooks(){
