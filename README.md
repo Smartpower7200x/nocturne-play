@@ -1,16 +1,29 @@
-# NOCTURNE · Interactive Story Cards (V0.5)
+# NOCTURNE · 互动抽卡仪式引擎
 
-本仓库仅用于原创互动抽卡 H5 的公开试玩。卡片不是传统塔罗牌。
+V0.5 · 原创故事抽卡 H5 公开试玩版。这里的卡牌不是传统 78 张塔罗牌，不提供命运预测。
 
-## GitHub Pages 发布
-1. 在 GitHub 创建 Public 仓库 `nocturne-play`，勾选 Add README 初始化 `main`。
-2. 将本目录 `index.html`, `styles.css`, `config.js`, `app.js`, `robots.txt`, `.nojekyll` 上传到仓库**根目录**。不要把 ZIP 整包当一个文件上传，也不要上传子文件夹包住 index.html。
-3. 打开 Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)` → Save。
-4. 在 GitHub Pages 设置页查看实际发布 URL；新站点可能需要一些时间才能生效。
-5. 真正上线后，在手机测试：进入→洗牌→选三张牌→选择结局→保存 PNG→复制好友挑战链接→另一台设备打开。
+## 当前发布状态
 
-## 测试限制
-- 原 V0.5 已通过浏览器模拟视口的主要交互回归，但尚未在真实安卓设备上确认滑动帧率、下载体验及跨设备邀请。
-- 当前版本仅静态前端，无账号/支付/访问统计；不要声称已有用户或转化率。
-- `.nojekyll` 允许 GitHub Pages 按原样托管静态文件，避免无关的 Jekyll 处理。
-- 本仓库未添加开源许可证；公开可读不等于自动授权第三方商业使用。注意公开仓库源代码可被查看。
+- ✅ `main` 已上传网页源码：`index.html`、`styles.css`、`config.js`、`app.js`、`robots.txt`、`.nojekyll`。
+- ✅ 静态文件的 Git blob 校验与原始部署包一致，JS 语法检查通过。
+- ⏳ GitHub Pages 仍需要在仓库设置中开启，公网访问和跨设备邀请尚未验收。
+
+## 首次启用 GitHub Pages
+
+1. 打开本仓库 **Settings → Pages**。
+2. 在 **Build and deployment** 中把 **Source** 选择为 **Deploy from a branch**。
+3. 选择 **Branch: `main`**、目录 **`/(root)`**，然后保存。
+4. 以 Pages 设置页实际显示的站点地址为准，确认页面可访问。
+5. 上线后逐项检查：手机洗牌、轮盘滑动、选三张卡、选择结局、保存结果图、复制好友挑战链接，以及朋友打开同题页面。
+
+不需要手动上传 ZIP，也不需要添加 Jekyll 配置。
+
+## 页面功能
+
+三种原创主题、故事焦点、弧形牌轮与抽牌、结局分支、第三张牌改写一次、故事复制、PNG 纪念图、好友同题口令和 HTTPS 链接（仅在网站上线后生成）。
+
+本版本没有账号、支付或访问统计。任何公开传播效果与真实设备帧率都须另行验证。
+
+## 权利说明
+
+本仓库暂无开源许可证。公开可访问并不意味着允许第三方复制、再发行或商业使用源码、设计或文字内容。
