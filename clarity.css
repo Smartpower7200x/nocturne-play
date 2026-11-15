@@ -1,0 +1,12 @@
+/* NOCTURNE V0.7: readable words, clear interactive steps. */
+.how-to{color:#d9e2d3;font:400 13px/1.7 var(--sans);margin:0 0 22px;padding:11px 0 12px;border-bottom:1px solid rgba(201,174,121,.20)}
+.how-to b{color:#dfcfab;font-weight:600}.how-to span{color:#c4a975;margin:0 5px}
+.card-section-caption{max-width:820px;margin:3px auto 15px}
+.card-section-caption h3{margin:0 0 4px;font:400 clamp(22px,3vw,29px)/1.4 var(--serif);color:#f4eddf}
+.card-section-caption p{margin:0;color:#b9c6b8;font-size:13px;line-height:1.65}
+.story-hook p,.story-ending p,.reading-item p{letter-spacing:0;line-height:1.85}
+.hook-overline{letter-spacing:.05em!important}
+.ending-kicker{font-size:12px;letter-spacing:.05em}
+.hook-choice{font-size:14px!important;letter-spacing:0!important}
+.ending-choice{font-size:14px!important;letter-spacing:0!important}
+@media(max-width:780px){.how-to{font-size:12px;margin-top:0;margin-bottom:12px;padding-bottom:9px}.card-section-caption{margin:0 0 10px}.card-section-caption h3{font-size:21px}.card-section-caption p{font-size:12px}.intro-subtitle{margin-bottom:11px}.hook-choice,.ending-choice{font-size:13px!important}}
